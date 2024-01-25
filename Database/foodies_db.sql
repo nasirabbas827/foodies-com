@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 23, 2023 at 09:51 AM
+-- Generation Time: Jan 25, 2024 at 11:21 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -136,6 +136,29 @@ INSERT INTO `menuitems` (`MenuItemID`, `RestaurantID`, `ItemName`, `Description`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `offers`
+--
+
+CREATE TABLE `offers` (
+  `offerID` int(11) NOT NULL,
+  `restaurantID` int(11) DEFAULT NULL,
+  `offerDescription` text DEFAULT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `offers`
+--
+
+INSERT INTO `offers` (`offerID`, `restaurantID`, `offerDescription`, `createdAt`) VALUES
+(1, 4, 'This is new offer ', '2024-01-25 10:15:02'),
+(2, 4, 'sgd', '2024-01-25 10:16:40'),
+(3, 4, 'hkjl', '2024-01-25 10:18:33'),
+(4, 4, 'cxcd', '2024-01-25 10:20:19');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
@@ -179,7 +202,8 @@ CREATE TABLE `restaurants` (
 INSERT INTO `restaurants` (`RestaurantID`, `OwnerID`, `RestaurantName`, `Location`, `RestaurantImage`) VALUES
 (1, 3, 'Nasirs Restaurant', 'Karachi', 'uploads/How to make SRS.jpg'),
 (2, 3, 'Nasirs Restaurant', 'Jampur', 'uploads/Creating a Complete Website Using Chatgpt part 6.png'),
-(3, 3, 'Nasirs Restaurant', 'Jampur', 'uploads/HOW TO MAKE Design Document USING CHATGPT.png');
+(3, 3, 'Nasirs Restaurant', 'Jampur', 'uploads/HOW TO MAKE Design Document USING CHATGPT.png'),
+(4, 5, 'Nasirs Restaurant', 'Jampur', 'uploads/WhatsApp Image 2024-01-25 at 1.44.56 PM.jpeg');
 
 -- --------------------------------------------------------
 
@@ -195,17 +219,19 @@ CREATE TABLE `users` (
   `phone` varchar(15) NOT NULL,
   `age` int(11) NOT NULL,
   `user_type` varchar(20) NOT NULL,
-  `status` varchar(20) NOT NULL
+  `status` varchar(20) NOT NULL,
+  `reset_token` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `phone`, `age`, `user_type`, `status`) VALUES
-(1, 'Food Lover 1', '$2y$10$t9FyxjdD0CXW0SHNkRsGp.pgIgHvYAjlwP6e/qcYWX8Cc6Tu3T/mS', 'food@gmail.com', '665423', 23, 'food_lover', 'approved'),
-(3, 'Resturant Owner', '$2y$10$phTrh5hBTpelJYcU/UI3IOdo9DADMnKQKVG9vdE3WJkTQvH/oYOUu', 'resturant@gmail.com', '665423865', 23, 'restaurant_owner', 'approved'),
-(4, 'NASIR ABBAS', '$2y$10$WJbuN4lryrwQspbJOVUmWuP6zmeWeCTls0gzcDZl74LAC7Mlk2qAe', 'res2@gmail.com', '', 0, 'restaurant_owner', 'approved');
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `phone`, `age`, `user_type`, `status`, `reset_token`) VALUES
+(1, 'Food Lover 1', '$2y$10$t9FyxjdD0CXW0SHNkRsGp.pgIgHvYAjlwP6e/qcYWX8Cc6Tu3T/mS', 'saifx280@gmail.com', '665423', 23, 'food_lover', 'approved', NULL),
+(3, 'Resturant Owner', '$2y$10$phTrh5hBTpelJYcU/UI3IOdo9DADMnKQKVG9vdE3WJkTQvH/oYOUu', 'resturant@gmail.com', '665423865', 23, 'restaurant_owner', 'approved', NULL),
+(4, 'NASIR ABBAS', '$2y$10$WJbuN4lryrwQspbJOVUmWuP6zmeWeCTls0gzcDZl74LAC7Mlk2qAe', 'res2@gmail.com', '', 0, 'restaurant_owner', 'approved', NULL),
+(5, 'nasir827', '$2y$10$f2R8jUndUS4cFgxGZi6vAOGCkMmrbmv5HzknztKt7Bydl/8d5sX9u', 'nasiryt.827@gmail.com', '3176526827', 23, 'restaurant_owner', 'approved', NULL);
 
 --
 -- Indexes for dumped tables
@@ -245,6 +271,13 @@ ALTER TABLE `menuitems`
   ADD PRIMARY KEY (`MenuItemID`),
   ADD KEY `RestaurantID` (`RestaurantID`),
   ADD KEY `CategoryID` (`CategoryID`);
+
+--
+-- Indexes for table `offers`
+--
+ALTER TABLE `offers`
+  ADD PRIMARY KEY (`offerID`),
+  ADD KEY `restaurantID` (`restaurantID`);
 
 --
 -- Indexes for table `orders`
@@ -306,6 +339,12 @@ ALTER TABLE `menuitems`
   MODIFY `MenuItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `offers`
+--
+ALTER TABLE `offers`
+  MODIFY `offerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
@@ -315,13 +354,13 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `restaurants`
 --
 ALTER TABLE `restaurants`
-  MODIFY `RestaurantID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `RestaurantID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -346,6 +385,12 @@ ALTER TABLE `feedbacks`
 ALTER TABLE `menuitems`
   ADD CONSTRAINT `menuitems_ibfk_1` FOREIGN KEY (`RestaurantID`) REFERENCES `restaurants` (`RestaurantID`),
   ADD CONSTRAINT `menuitems_ibfk_2` FOREIGN KEY (`CategoryID`) REFERENCES `categories` (`CategoryID`);
+
+--
+-- Constraints for table `offers`
+--
+ALTER TABLE `offers`
+  ADD CONSTRAINT `offers_ibfk_1` FOREIGN KEY (`restaurantID`) REFERENCES `restaurants` (`RestaurantID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `orders`

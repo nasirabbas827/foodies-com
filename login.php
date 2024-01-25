@@ -121,6 +121,8 @@ include('navbar.php');
             </div>
         </form>
         <p class="text-center">Have'nt any Account <a href="register.php">Register here</a></p>
+        <p class="text-center"><a href="forgot_password.php">Forgot Password?</a></p>
+
         
     </div>
 

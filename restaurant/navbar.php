@@ -10,6 +10,7 @@
             <li class="nav-item"><a class="nav-link" href="add_category.php">Add Category</a></li>
             <li class="nav-item"><a class="nav-link" href="add_menu.php">Add Menu</a></li>
             <li class="nav-item"><a class="nav-link" href="view_orders.php">Orders</a></li>
+            <li class="nav-item"><a class="nav-link" href="add_offer.php">Offers</a></li>
             <li class="nav-item"><a class="nav-link" href="feedbacks.php">Feedbacks</a></li>
             <li class="nav-item"><a class="nav-link" href="view_messages.php">Messages</a></li>
             <li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
